@@ -298,7 +298,7 @@ client.on("message", message => {
       if (message.guild) {
       let embed = new Discord.RichEmbed()
       let args = message.content.split(' ').slice(1).join(' ');
-      if(message.content.split(' ')[0] ==prefix + "!bc") {
+      if(message.content.split(' ')[0] ==prefix + "bc") {
       if (message.author.bot) return;
         if(!message.member.hasPermission('ADMINISTRATOR')) return;
       if (!args[1]) {
