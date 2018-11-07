@@ -3,13 +3,12 @@ const client = new Discord.Client();
 var prefix = "+";
 client.on('ready', () => {
    console.log(`----------------`);
-      console.log(`Desert Bot- Script By : EX Clan`);
+      console.log(`Desert Bot- Script By : AJ`);
         console.log(`----------------`);
-      console.log(`ON ${client.guilds.size} Servers '     Script By : EX Clan ' `);
+      console.log(`ON ${client.guilds.size} Servers '     Script By : AJ ' `);
     console.log(`----------------`);
   console.log(`Logged in as ${client.user.tag}!`);
-client.user.setGame(`Death Shop`,"http://twitch.tv/Death Shop")
-client.user.setStatus("dnd")
+
 });
 
 client.on("message", async message => {
@@ -48,7 +47,7 @@ client.on("message", async message => {
     });
 
 client.on('message', function(message) {
-    if (message.content == "+clear") {
+    if (message.content == "مسح") {
         if (message.member.hasPermission("MANAGE_MESSAGES")) {
             message.channel.fetchMessages()
                .then(function(list){
@@ -60,7 +59,7 @@ client.on('message', function(message) {
 });
 	
   client.on('message', message => {
-    if (message.content.startsWith("+link")) {
+    if (message.content.startsWith("رابط")) {
 
   message.channel.createInvite({
         thing: true,
@@ -71,7 +70,7 @@ client.on('message', function(message) {
     )
   message.channel.send("**تم ارسال الرابط برسالة خاصة**")
 
-message.author.send(`**مدة الرابط : يـوم
+message.author.send(`**مدة الرابط : يوم
 دد استخدامات الرابط : 25**`)
 
     }
@@ -184,18 +183,18 @@ client.on('message', async message => {
       message.delete(3500);
     });
  
-    let mention = message.mentions.members.first();//kinggamer حقوق الفا كودز و
-    if(!mention) return  message.channel.send('').then(msg => { //kinggamer حقوق الفا كودز و
+    let mention = message.mentions.members.first();
+    if(!mention) return  message.channel.send('').then(msg => { 
       msg.delete(3500);
       message.delete(3500);
     });
  
     if(mention.id === message.author.id) return message.channel.send('**:x:You Cannot give mute to your self**').then(msg => {
       msg.delete(3500);
-      message.delete(3500); //kinggamer حقوق الفا كودز و
+      message.delete(3500); 
     });
    
-    if(mention.hasPermission('ADMINISTRATOR')) return message.channel.send(`**:x: لا يمكن آعطاء ميوت لادارة السيرفر**`); //kinggamer حقوق الفا كودز و
+    if(mention.hasPermission('ADMINISTRATOR')) return message.channel.send(`**:x: لا يمكن آعطاء ميوت لادارة السيرفر**`);
  
     if(message.guild.member(mention).roles.find('name', 'Muted')) return message.channel.send(`**:information_source: ${mention.user.username} Already Muted**`);
  
@@ -207,7 +206,7 @@ client.on('message', async message => {
    
     if(mention.positon >= message.guild.member(client.user).positon) return message.channel.send('I Donot Have Permission **Muted_Members**').then(msg => {
       msg.delete(3500);
-      message.delete(3500); //kinggamer حقوق الفا كودز و
+      message.delete(3500); 
     });
    
     let duration = args[2];
@@ -227,7 +226,7 @@ client.on('message', async message => {
     let thisEmbed = new Discord.RichEmbed()
     .setAuthor(mention.user.username, mention.user.avatarURL)
     .setTitle('**تم آعطائك ميوت**')
-    .addField('**__السيرفر__**',[ message.guild.name ]) //kinggamer حقوق الفا كودز و
+    .addField('**__السيرفر__**',[ message.guild.name ])
     .addField('**__تم آعطائك ميوت بواسطة__**', [ message.author ])
     .addField('**__آلسبب__**',reason)
     .addField('**__وقت الميوت__**',duration)
@@ -236,36 +235,36 @@ client.on('message', async message => {
     if(!role) try {
       message.guild.createRole({
         name: "Muted",
-        permissions: 0 //kinggamer حقوق الفا كودز و
+        permissions: 0 
       }).then(r => {
         message.guild.channels.forEach(c => {
           c.overwritePermissions(r , {
-            SEND_MESSAGES: false, //kinggamer حقوق الفا كودز و
+            SEND_MESSAGES: false, 
             READ_MESSAGES_HISTORY: false,
             ADD_REACTIONS: false
           });
         });
-      }); //kinggamer حقوق الفا كودز و
+      }); 
     } catch(e) {
       console.log(e.stack);
     }
     mention.addRole(role).then(() => {
       mention.send(thisEmbed);
       message.channel.send(`**:white_check_mark: ${mention.user.username}  Muted! :zipper_mouth:  **  `);
-      mention.setMute(true); //kinggamer حقوق الفا كودز و
+      mention.setMute(true); 
     });
     setTimeout(() => {
       if(duration === 0) return;
       mention.setMute(false);
       mention.removeRole(role)
-    },duration * 60000); //kinggamer حقوق الفا كودز و
+    },duration * 60000); 
   }
 });
 client.on('message', async message => {
     let mention = message.mentions.members.first();
 let command = message.content.split(" ")[0];
      command = command.slice(prefix.length);
-    let args = message.content.split(" ").slice(1);  //kinggamer حقوق الفا كودز و
+    let args = message.content.split(" ").slice(1);  
 if(command === `unmute`) {2
   if(!message.member.hasPermission("MUTE_MEMBERS")) return message.channel.sendMessage("**You Donot HavePermission Mute_Members**").then(m => m.delete(5000));
 if(!message.guild.member(client.user).hasPermission("MUTE_MEMBERS")) return message.reply("**I donot Have Permission Mute_Members**").then(msg => msg.delete(6000))
@@ -273,14 +272,14 @@ if(!message.guild.member(client.user).hasPermission("MUTE_MEMBERS")) return mess
   let kinggamer = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
      if(!kinggamer) return message.channel.send('').then(msg => {
       msg.delete(3500);
-      message.delete(3500); //kinggamer حقوق الفا كودز و
+      message.delete(3500); 
     });
  
   let role = message.guild.roles.find (r => r.name === "Muted");
  
   if(!role || !kinggamer.roles.has(role.id)) return message.channel.sendMessage(`**:information_source:${mention.user.username} لقد تم فك الميوت عنه مسبقا**`)
  
-  await kinggamer.removeRole(role) //kinggamer حقوق الفا كودز و
+  await kinggamer.removeRole(role) 
   message.channel.sendMessage(`**:white_check_mark: ${mention.user.username}  Unmuted! **`);
  
   return;
@@ -289,4 +288,236 @@ if(!message.guild.member(client.user).hasPermission("MUTE_MEMBERS")) return mess
  
 });
 
-client.login(process.env.BOT_TOKEN);// لا تغير فيها شيء
+
+
+
+
+
+
+client.on("message", message => {
+      if (message.guild) {
+      let embed = new Discord.RichEmbed()
+      let args = message.content.split(' ').slice(1).join(' ');
+      if(message.content.split(' ')[0] ==prefix + "!bc") {
+      if (message.author.bot) return;
+        if(!message.member.hasPermission('ADMINISTRATOR')) return;
+      if (!args[1]) {
+              message.channel.send(`${prefix}bc <message>`);
+return;
+          
+  }
+const client = new Discord.RichEmbed()
+             .setAuthor(message.author.username, message.author.avatarURL)   
+             .setTitle(' جاري ارسال رسالتك ') 
+             .addBlankField(true)
+             .addField(':two_men_holding_hands: | عدد الاعضاء المرسل لهم ', message.guild.memberCount , true)        
+             .addField(':incoming_envelope: | الرسالة ', args)
+             .setColor('RANDOM')  
+              message.channel.sendEmbed(client);  
+                 message.channel.send('لتأكيد الرسالة(نعم/لا)');
+
+      let user = message.author;
+const collector = new Discord.MessageCollector(message.channel, m => user === user, { time: 10000 }) 
+     collector.on('collect', message => {
+      if (message.content == "نعم") {
+              message.guild.members.forEach(m => {
+      var bc = new Discord.RichEmbed()
+             .setAuthor(message.author.username, message.author.avatarURL)
+             .addField(' الـسيرفر', `${message.guild.name}`,true)
+             .addField(' الـمرسل ', `${message.author.username}#${message.author.discriminator}`,true)
+             .addField(' الرسالة ', args)
+             .setThumbnail(message.guild.iconURL)
+             .setColor('RANDOM')
+             m.send(`${m}`,{embed: bc});
+ })                
+  } else if (message.content == "لا") {
+return message.reply('لن يتم ارسال الرسالة');
+  }                          
+});
+  }
+  } else {
+return;
+  }        
+});
+
+
+
+
+
+
+client.on('guildMemberAdd', member => {
+    let channel = member.guild.channels.find('name', 'chat');
+    let memberavatar = member.user.avatarURL
+      if (!channel) return;
+    let embed = new Discord.RichEmbed()
+        .setColor('RANDOM')
+        .setThumbnail(memberavatar)
+        .addField(':running_shirt_with_sash: | name :  ',`${member}`)
+        .addField(':loudspeaker: | نورت السيرفر يا قلبي' , `Welcome to the server, ${member}`)
+        .addField(':id: | user :', "**[" + `${member.id}` + "]**" )
+                .addField('➡| انت العضو رقم',`${member.guild.memberCount}`)
+               
+                  .addField("Name:",`<@` + `${member.id}` + `>`, true)
+                     
+                                     .addField(' الـسيرفر', `${member.guild.name}`,true)
+                                       
+     .setFooter(`${member.guild.name}`)
+        .setTimestamp()
+   
+      channel.sendEmbed(embed);
+    });
+    
+var dat = JSON.parse("{}");
+function forEachObject(obj, func) {
+    Object.keys(obj).forEach(function (key) { func(key, obj[key]) })
+}
+client.on("ready", () => {
+    var guild;
+    while (!guild)
+        guild = client.guilds.find("name", "AJ Gaming")
+    guild.fetchInvites().then((data) => {
+        data.forEach((Invite, key, map) => {
+            var Inv = Invite.code;
+            dat[Inv] = Invite.uses;
+        })
+    })
+})
+client.on("guildMemberAdd", (member) => {
+    let channel = member.guild.channels.find('name', 'chat');
+    if (!channel) {
+        console.log("!channel fails");
+        return;
+    }
+    if (member.id == client.user.id) {
+        return;
+    }
+    console.log('made it till here!');
+    var guild;
+    while (!guild)
+        guild = client.guilds.find("name", "AJ Gaming")
+    guild.fetchInvites().then((data) => {
+        data.forEach((Invite, key, map) => {
+            var Inv = Invite.code;
+            if (dat[Inv])
+                if (dat[Inv] < Invite.uses) {
+                    console.log(3);
+                    console.log(`${member} joined over ${Invite.inviter}'s invite ${Invite.code}`)
+ channel.send(`  **تم دعوته من قبل ${Invite.inviter} ** 
+ :link:  https://discord.gg/${Invite.code}`)            
+ }
+            dat[Inv] = Invite.uses;
+        })
+    })
+});
+
+
+
+
+client.on('message', message => {
+var prefix = "+";
+
+  if (!message.content.startsWith(prefix)) return;
+  var args = message.content.split(' ').slice(1);
+  var argresult = args.join(' ');
+  if (message.author.id == 410835593451405312)
+return;
+if (message.content.startsWith(prefix + 'مشغول')) {
+  if (message.author.id !== '400955088052420610') return message.react('⚠')
+client.user.setStatus('dnd');  
+message.react("✅")
+}
+                        
+ });
+
+
+client.on('message', message => {
+var prefix = "+";
+
+  if (!message.content.startsWith(prefix)) return;
+  var args = message.content.split(' ').slice(1);
+  var argresult = args.join(' ');
+  if (message.author.id == 410835593451405312)
+return;
+
+
+if (message.content.startsWith(prefix + 'متصل')) {
+  if (message.author.id !== '400955088052420610') return message.react('⚠')
+  client.user.setStatus('online');  
+message.react("✅")
+}
+                        
+ });
+
+
+client.on('message', message => {
+var prefix = "+";
+
+  if (!message.content.startsWith(prefix)) return;
+  var args = message.content.split(' ').slice(1);
+  var argresult = args.join(' ');
+  if (message.author.id == 410835593451405312)
+return;
+if (message.content.startsWith(prefix + 'فلخارج')) {
+   if (message.author.id !== '400955088052420610') return message.react('⚠')
+client.user.setStatus('idle');  
+message.react("✅")
+}
+                        
+ });
+
+
+client.on('message', message => {
+var prefix = "+";
+
+  if (!message.content.startsWith(prefix)) return;
+  var args = message.content.split(' ').slice(1);
+  var argresult = args.join(' ');
+  if (message.author.id == 410835593451405312)
+return;
+
+
+if (message.content.startsWith(prefix + 'مخفي')) {
+    if (message.author.id !== '400955088052420610') return message.react('⚠')
+client.user.setStatus('invisible');  
+message.react("✔")
+}
+                        
+ });
+
+
+
+
+
+ const adminprefix = "+";
+const devs = ['400955088052420610'];
+client.on('message', message => {
+  var argresult = message.content.split(` `).slice(1).join(' ');
+    if (!devs.includes(message.author.id)) return;
+    
+if (message.content.startsWith(adminprefix + 'playing')) {
+  client.user.setGame(argresult);
+    message.channel.sendMessage(`**${argresult} تم تغيير بلاينق البوت إلى **`);
+} else 
+  if (message.content.startsWith(adminprefix + 'setname')) {
+client.user.setUsername(argresult).then;
+    message.channel.sendMessage(`**${argresult}** : تم تغيير أسم البوت إلى`);
+return message.reply("**لا يمكنك تغيير الاسم يجب عليك الانتظآر لمدة ساعتين . **");
+} else
+  if (message.content.startsWith(adminprefix + 'setavatar')) {
+client.user.setAvatar(argresult);
+  message.channel.sendMessage(`**${argresult}** : تم تغير صورة البوت`);
+      } else     
+if (message.content.startsWith(adminprefix + 'streaming')) {
+  client.user.setGame(argresult, "https://www.twitch.tv/idk");
+    message.channel.sendMessage(`**تم تغيير تويتش البوت إلى  ${argresult}**`);
+}
+
+});
+
+
+
+
+
+
+
+client.login(process.env.BOT_TOKEN);
