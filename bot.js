@@ -123,7 +123,7 @@ client.on('message', message => {
 
       .setFooter(message.author.username, message.author.avatarURL)
 
-      .setTitle(':tulip:| Members info')
+      .setTitle('Members info')
 
       .addBlankField(true)
 
@@ -181,7 +181,7 @@ client.on('message', (message) => {
 
         member.ban().then((member) => {
 
-         message.channel.send(member.displayName + 'تم طرد هذا الشخص من السيرفر');
+         message.channel.send(member.displayName + ' تم طرد هذا الشخص من السيرفر');
 
         }).catch(() => {
 
