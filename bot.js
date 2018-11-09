@@ -58,23 +58,7 @@ client.on('message', function(message) {
 
 });
 	
-  client.on('message', message => {
-    if (message.content.startsWith("رابط")) {
 
-  message.channel.createInvite({
-        thing: true,
-        maxUses: 25,
-        maxAge: 86400
-    }).then(invite =>
-      message.author.sendMessage(invite.url)
-    )
-  message.channel.send("**تم ارسال الرابط برسالة خاصة**")
-
-message.author.send(`**مدة الرابط : يوم
-دد استخدامات الرابط : 25**`)
-
-    }
-});
 
 
 client.on('message', message => {
