@@ -11,43 +11,45 @@ client.on('ready', () => {
 
 });
 
-client.on("message", async message => {
-        if(!message.channel.guild) return;
- var prefix= "+";
-        if(message.content.startsWith(prefix + 'server')) {
-        let guild = message.guild
-        let channel = message.channel
-        let guildicon = guild.icon_url
-        let members = guild.memberCount
-        let bots = guild.members.filter(m => m.user.bot).size
-        let humans = members - bots
-        let allchannels = guild.channels.size
-        let textchannels = guild.channels.filter(e => e.type === "text")
-        let voicechannels = guild.channels.filter(e => e.type === "voice")
-          var embed = new Discord.RichEmbed()
-          .setColor("#000000")
-          .setTitle(`معلومات عن السيرفر`)
-          .setDescription(`معلومات عن : ${guild.name}`)
-          .addField("صاحب السيرفر :", `${guild.owner}`, true)
-          .addField("أيدي السيرفر :", `${guild.id}`, true)
-          .addField("موقع السيرفر :", `${guild.region}`, true)
-          .addField("مستوى حماية السيرفر :", `${guild.verificationLevel}`, true)
-          .addField("عدد الرومات الصوتية :", `${voicechannels.size}`, true)
-          .addField("عدد الرومات الكتابية :", `${textchannels.size}`, true)
-          .addField("عدد اعضاء السيرفر :", `${members}`, true)
-          .addField("عدد البوتات :", `${bots}`, true)
-          .addField("عدد الاشخاص :", `${humans}`, true)
-          .addField("عدد رتب السيرفر :", `${guild.roles.size}`, true)
-          .addField(`أيموجيات الخاصة بالسيرفر : (${guild.emojis.size})`, `- ${guild.emojis.array()}`, true)
-          .setFooter(`تم انشاء هذه السيرفر في: ${guild.createdAt}`)
- 
-       message.channel.send({ embed: embed });
- 
-      }
-    });
 
 
 	
+
+
+client.on('message', message => {
+    let args = message.content.split(" ").slice(1);
+if (message.content.startsWith(prefix + 'مسح')) {
+ let args = message.content.split(" ").slice(1)
+    let messagecount = parseInt(args);
+    if (args > 100) return message.reply("**يجب ان يكون عدد المسح أقل من 100 .**").then(messages => messages.delete(5000))
+    if (!messagecount) return message.reply("**أختر كميه الرسائل المراد مسحها .**").then(messages => messages.delete(5000))
+    message.channel.fetchMessages({limit: messagecount + 1}).then(messages => message.channel.bulkDelete(messages));
+    message.channel.send(`\`${args}\` : __عدد الرسائل التي تم مسحها __ `).then(messages => messages.delete(5000));
+  }
+  });
+
+
+
+
+client.on('message',async message => {
+  if(message.content.startsWith("+
+setvoice")) {
+  if(!message.guild.member(message.author).hasPermissions('MANAGE_CHANNELS')) return message.reply('❌ **ليس لديك الصلاحيات الكافية**');
+  if(!message.guild.member(client.user).hasPermissions(['MANAGE_CHANNELS','MANAGE_ROLES_OR_PERMISSIONS'])) return message.reply('❌ **ليس معي الصلاحيات الكافية**');
+  message.channel.send('✅| **تم عمل الروم بنجاح**');
+  message.guild.createChannel(`Voice Online : [ ${message.guild.members.filter(m => m.voiceChannel).size} ]` , 'voice').then(c => {
+    console.log(`Voice online channel setup for guild: \n ${message.guild.name}`);
+    c.overwritePermissions(message.guild.id, {
+      CONNECT: false,
+      SPEAK: false
+    });
+    setInterval(() => {
+      c.setName(`Voice Online : [ ${message.guild.members.filter(m => m.voiceChannel).size} ]`)
+    },1000);
+  });
+  }
+});
+
 
 
 
