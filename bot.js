@@ -15,16 +15,50 @@ client.on('ready', () => {
 
 	
 
+client.on('message', message => {
+if(!message.channel.guild) return;
+if(message.content.startsWith("اسحب")) {
+ if (message.member.hasPermission("MOVE_MEMBERS")) {
+ if (message.mentions.users.size === 0) {
+ return message.channel.send("**لاستخدام الأمر اكتب هاذا الأمر : اسحب [منشن]**")
+}
+if (message.member.voiceChannel != null) {
+ if (message.mentions.members.first().voiceChannel != null) {
+ var authorchannel = message.member.voiceChannelID;
+ var usermentioned = message.mentions.members.first().id;
+var embed = new Discord.RichEmbed()
+ .setTitle("Succes!")
+ .setColor("#000000")
+ .setDescription(`لقد قمت بسحب <@${usermentioned}> الى الروم الصوتي الخاص بك:white_check_mark: `)
+var embed = new Discord.RichEmbed()
+.setDescription(`تم سحب <@${usermentioned}>`)
+ .setColor("#000000")
+ message.guild.members.get(usermentioned).setVoiceChannel(authorchannel).then(m => message.channel.send(embed))
+message.guild.members.get(usermentioned).send(embed)
+} else {
+message.channel.send("``لا تستطيع سحب "+ message.mentions.members.first() +" `يجب ان يكون هذه العضو في روم صوتي`")
+}
+} else {
+ message.channel.send("**يجب ان تكون في روم صوتي لكي تقوم بسحب العضو أليك**")
+}
+} else {
+message.react("❌")
+ }}});
+
+
+
+
+
 
 client.on('message', message => {
     let args = message.content.split(" ").slice(1);
-if (message.content.startsWith(prefix + 'مسح')) {
+if (message.content.startsWith("مسح")) {
  let args = message.content.split(" ").slice(1)
     let messagecount = parseInt(args);
     if (args > 100) return message.reply("**يجب ان يكون عدد المسح أقل من 100 .**").then(messages => messages.delete(5000))
     if (!messagecount) return message.reply("**أختر كميه الرسائل المراد مسحها .**").then(messages => messages.delete(5000))
     message.channel.fetchMessages({limit: messagecount + 1}).then(messages => message.channel.bulkDelete(messages));
-    message.channel.send(`\`${args}\` : __عدد الرسائل التي تم مسحها __ `).then(messages => messages.delete(5000));
+    message.channel.send(\`${args}\ : عدد الرسائل التي تم مسحها  `).then(messages => messages.delete(5000));
   }
   });
 
