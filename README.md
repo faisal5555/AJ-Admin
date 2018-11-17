@@ -1,1 +1,1 @@
-# AJ Administration
+# AJ Admin
