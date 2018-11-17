@@ -46,17 +46,7 @@ client.on("message", async message => {
       }
     });
 
-client.on('message', function(message) {
-    if (message.content == "مسح") {
-        if (message.member.hasPermission("MANAGE_MESSAGES")) {
-            message.channel.fetchMessages()
-               .then(function(list){
-                    message.channel.bulkDelete(list);
-                }, function(err){message.channel.send("ERROR: ERROR CLEARING CHANNEL.")})
-        }
-    }
 
-});
 	
 
 
@@ -401,25 +391,6 @@ client.on('message', async message =>{
 
 
 
-
-
-client.on('message', message => {
-    if (message.content.startsWith("رابط")) {
-
-  message.channel.createInvite({
-        thing: true,
-        maxUses: 25,
-        maxAge: 86400
-    }).then(invite =>
-      message.author.sendMessage(invite.url)
-    )
-  message.channel.send("**تم ارسال الرابط برسالة خاصة**")
-
-message.author.send(`**مدة الرابط : يوم
- استخدامات الرابط : 25**`)
-
-    }
-});
 
 
 
