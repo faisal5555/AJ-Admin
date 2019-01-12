@@ -444,38 +444,6 @@ msg.delete();
 
 
 
-const Discord = require('discord.js');
-const client = new Discord.Client();
- 
-client.on('message', message => {
-if(!message.channel.guild) return;
-  if(message.content.startsWith(prefix + 'sr')) {
-      let role = message.guild.roles.find('name', 'Rainbow ')
-    if(role) return message.channel.send(`يوجد بلفعل رتبه موجوده ضع البوت فوق الرتبه`)
-  if(!role){
-    rainbow =  message.guild.createRole({
-   name: "Rainbow ",
-   color: "#000000",
-   permissions:[ADMINISTRATOR]  
- 
-})
- 
-}
-message.channel.send('تم اعداد رتبه الرنبو بنجاح 🌈')//if the step completed
-}})
- 
-client.on('ready', () => {
-  setInterval(function(){
-      client.guilds.forEach(g => {
-                  var role = g.roles.find('name', 'Rainbow ');
-                  if (role) {//Codes Server
-                      role.edit({color : "RANDOM"});
-                  };
-      });
-  }, 5000);
-})
-
-
 
 
 
