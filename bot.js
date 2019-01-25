@@ -108,7 +108,7 @@ if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('لي�
          SEND_MESSAGES: true
 
            }).then(() => {
-               message.reply("تم فتح الشات?")
+               message.reply("تم فتح الشات")
            });
              }
 
